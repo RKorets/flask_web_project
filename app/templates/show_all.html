@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Address Book</title>
+     {% extends "layout.html" %}
+    {% block body %}
+</head>
+<body>
+ <div class="mt-1 px-0">
+    <a href="{{ url_for('index') }}"><button style="background-color:green;border: 20px solid green;" class="btn btn-primary btn-sm follow">Back main page</button></a></div>
+<h1 style="color:mediumblue;text-align:center">Contact book:</h1>
+ <div class="wrapper">
+ {% for user in pages.items %}
+  <div class="wrapper">{% include 'cards.html'%}</div><br>
+
+
+    {% endfor %}
+     </div>
+
+
+
+</body>
+<style>
+    .wrapper {
+
+   display: inline-flex;
+  grid-template-columns: repeat(1, 1fr);
+  grid-auto-rows: 200px;
+         width: 100%;
+
+}
+.center {
+  text-align: center;
+}
+
+.pagination {
+  display: inline-block;
+   position: fixed;
+    bottom: 40%;
+    left: 45%;
+  width: 100%;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+}
+
+.pagination a.active {
+  background-color: mediumblue;
+  color: white;
+  border: 1px solid blue;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+</style>
+</head>
+
+
+
+<div class="center">
+  <div class="pagination">
+  <a href="show-users?page={{ pages.prev_num}}" class="page-link {% if not pages.has_prev%}disabled{%endif%}" >&laquo;</a>
+  {% for page in pages.iter_pages()%}
+  <a href="show-users?page={{page}}" class="{% if page == pages.page %}active {% endif %}">{{page}}</a>
+       {% endfor %}
+  <a href="show-users?page={{ pages.next_num }}" class="page-link {% if not pages.has_next%}disabled{%endif%}">&raquo;</a>
+
+  </div>
+</div>
+{% endblock %}
+</html>

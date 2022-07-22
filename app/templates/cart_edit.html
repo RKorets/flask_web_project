@@ -1,0 +1,98 @@
+<html>
+
+<head>
+
+<title>User</title>
+{% extends "layout.html" %}
+    {% block body %}
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st2.depositphotos.com/3557671/11719/v/950/depositphotos_117194726-stock-illustration-businessman-icon-flat-single-avatarpeople.jpg"><span class="font-weight-bold">{{form.username.data}}</span><span class="text-black-50">{{form.address.data}}</span><span> </span></div>
+        </div>
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Profile Settings</h4>
+                </div>
+                                 {% if success%}
+        <p style="color:green">Successful!</p>
+      {% elif success == None %}
+        <p style="color:red">Profile with that name exists!</p>
+      {% endif %}
+                <form method="post" action="">
+                <div class="row mt-2">
+                    {% for field in form %}
+                      {%if field.label.text == 'username'%}
+                    <div class="col-md-6"><label class="labels">Username</label>{{ field(class="form-control") }}</div>
+                      {%endif%}
+                      {%if field.label.text == 'address'%}
+                    <div class="col-md-12"><label class="labels">Address</label>{{ field(class="form-control") }}</div>
+                      {%endif%}
+                    {%endfor%}
+                </div>
+
+
+                <div class="row mt-3">
+                    {%if form.data.get('phone')%}
+                    <div class="col-md-12"><label class="labels">Mobile Number</label>
+                           {% for field in form %}
+
+                             {%if field.label.text == "Phone"%}
+                              {%for i in field.data%}
+                        <br><input class="form-control" id="phone-{{loop.index0}}-phone" name="phone-{{loop.index0}}-phone" type="text" value={{i["phone"]}}>
+
+                             {%endfor%}
+                         </div>
+                             {%endif%}
+                           {%endfor%}
+
+
+                    {%else%}
+                    <div class="col-md-12"><label class="labels">Mobile Number</label>
+
+                        <br><input class="form-control" id="phone-0-phone" name="phone-0-phone" type="text" placeholder="enter phone" value="">
+
+                    </div>
+                    {%endif%}
+
+                    {%if form.data.get('email')%}
+                    <div class="col-md-12"><label class="labels">Email</label>
+                           {% for field in form %}
+
+                             {%if field.label.text == "Email"%}
+                              {%for i in field.data%}
+                        <br><input class="form-control" id="email-{{loop.index0}}-email" name="email-{{loop.index0}}-email" type="text" value={{i["email"]}}>
+
+                             {%endfor%}
+                         </div>
+                             {%endif%}
+                           {%endfor%}
+
+
+                    {%else%}
+                    <div class="col-md-12"><label class="labels">Email</label>
+
+                        <br><input class="form-control" id="email-0-email" name="email-0-email" type="text" placeholder="enter email" value="">
+
+                    </div>
+                    {%endif%}
+
+
+                </div>
+                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Profile</button>
+                    <a href="/show-users"><button class="btn btn-primary profile-button" style="background-color: brown" type="button">Close Profile</button></a></div>
+             </form>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</head>
+{% endblock %}
+    </html>
+

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Address Book</title>
+   {% extends "layout.html" %}
+    {% block body %}
+</head>
+<body>
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="col-md-5 border-right">
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-center">Create User</h4>
+                </div>
+         {% if request.method == 'POST' and name=='user already exist'%}
+        <p style="color:blue">User already exist, try again!</p>
+      {% elif request.method == 'POST' and name %}
+        <p style="color:green">{{ name }} has been created!</p>
+      {% elif request.method == 'POST' %}
+        <p style="color:red">Name field must be filled</p>
+      {% endif %}
+            </div>
+    </div>
+<form method="POST">
+
+    <div class="container rounded bg-white mt-5 mb-5">
+                  <div class="col-md-12"><label class="labels">Name: <br><input type="text" name="name"></label>
+                <label class="labels">Phone:<br><input type="text" name="phone" value=""></label></div>
+                  <div class="col-md-6"><label class="labels">Email:<br><input type="email" name="email" value=""></label>
+                  <label class="labels">Address:<br><input type="text" name="address" value=""></label></div>
+                   <div class="mt-4 text-left"><button class="btn btn-primary profile-button" type="submit">Save Profile</button>
+                   <a href="/"><button class="btn btn-primary profile-button" style="background-color: brown" type="button">Close form</button></a></div>
+    </div>
+
+              </form>
+
+</body>
+{% endblock %}
+</html>
